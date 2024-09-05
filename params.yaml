@@ -1,0 +1,22 @@
+base:
+  random_state: 42
+
+data_load:
+  file_id: '1v5PlKhhafsmWEvRUBj4Zpo2kkNDDR4HY'
+  raw_path: 'data/raw'
+  compact_name: 'mushroom.zip'
+
+data_decompress:
+  processed_path: 'data/processed'
+
+train:
+  train_file: data/processed/train.csv
+  random_forest:
+    n_estimators: 20
+    max_depth: 5
+
+
+metadata:
+  id_col: 'id'
+  target_col: 'class'
+  test_size: 0.75

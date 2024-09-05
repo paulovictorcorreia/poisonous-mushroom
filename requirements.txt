@@ -48,6 +48,7 @@ dvc-objects==0.25.0
 dvc-render==0.7.0
 dvc-studio-client==0.21.0
 dvc-task==0.4.0
+exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1720869315914/work
 executing==2.1.0
 fastjsonschema==2.20.0
 filelock==3.15.4
@@ -58,6 +59,7 @@ fqdn==1.5.1
 frozenlist==1.4.1
 fsspec==2024.9.0
 funcy==2.0
+gdown==5.2.0
 gitdb==4.0.11
 GitPython==3.1.43
 grandalf==0.8
@@ -66,6 +68,7 @@ httpcore==1.0.5
 httpx==0.27.2
 hydra-core==1.3.2
 idna==3.8
+importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1724187233579/work
 iniconfig==2.0.0
 ipykernel==6.29.5
 ipython==8.27.0
@@ -123,6 +126,7 @@ pandas==1.5.3
 pandocfilters==1.5.1
 parso==0.8.4
 pathspec==0.12.1
+pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1602536217715/work
 pillow==10.4.0
 platformdirs==3.11.0
 pluggy==1.5.0
@@ -137,6 +141,7 @@ pygit2==1.15.1
 Pygments==2.18.0
 pygtrie==2.5.0
 pyparsing==3.1.4
+PySocks==1.7.1
 pytest==6.2.5
 python-box==5.4.1
 python-dateutil==2.9.0.post0
@@ -144,7 +149,7 @@ python-json-logger==2.0.7
 pytz==2024.1
 pywin32==306
 pywinpty==2.0.13
-PyYAML==6.0.2
+PyYAML==6.0.1
 pyzmq==26.2.0
 referencing==0.35.1
 requests==2.32.3
@@ -157,6 +162,7 @@ ruamel.yaml.clib==0.2.8
 scikit-learn==1.5.1
 scipy==1.14.1
 scmrepo==1.4.1
+seaborn==0.13.2
 Send2Trash==1.8.3
 setuptools==74.1.1
 shortuuid==1.0.13
@@ -183,10 +189,11 @@ uri-template==1.3.0
 urllib3==2.2.2
 vine==5.1.0
 voluptuous==0.15.2
-wcwidth==0.2.13
+wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1704731205417/work
 webcolors==24.8.0
-webencodings==0.5.1
 websocket-client==1.8.0
+wheel==0.44.0
 widgetsnbextension==4.0.13
 yarl==1.9.8
 zc.lockfile==3.0.post1
+zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1724730934107/work
