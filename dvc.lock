@@ -1,0 +1,132 @@
+schema: '2.0'
+stages:
+  data_load:
+    cmd: python poisonous_mushroom_analysis/stages/data_load.py --config=params.yaml
+    deps:
+    - path: poisonous_mushroom_analysis/stages/data_load.py
+      md5: f14e0d401c53d6eca1f2c24b06231437
+      size: 1113
+    params:
+      params.yaml:
+        data_decompress:
+          processed_path: data/processed
+        data_load:
+          file_id: 1v5PlKhhafsmWEvRUBj4Zpo2kkNDDR4HY
+          raw_path: data/raw
+          compact_name: mushroom.zip
+    outs:
+    - path: data/processed/test.csv
+      md5: ddb17d867c47c85376cd6862a5173ac1
+      size: 108764610
+    - path: data/processed/train.csv
+      md5: 109cc1efd78268bb5e95d577723c0bef
+      size: 168271373
+  preprocessing:
+    cmd: python poisonous_mushroom_analysis/stages/preprocessing.py --config=params.yaml
+    deps:
+    - path: data/processed/test.csv
+      md5: ddb17d867c47c85376cd6862a5173ac1
+      size: 108764610
+    - path: data/processed/train.csv
+      md5: 109cc1efd78268bb5e95d577723c0bef
+      size: 168271373
+    - path: poisonous_mushroom_analysis/stages/preprocessing.py
+      md5: d399eff0299a28fe1c1761ff253cf51c
+      size: 2574
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+          n_jobs: -1
+        metadata:
+          id_col: id
+          target_col: class
+        preprocessing:
+          test_size: 0.2
+          original_train: data/processed/train.csv
+          original_test: data/processed/test.csv
+          trainset_path: data/interim/train.csv
+          valset_path: data/interim/val.csv
+          testset_path: data/interim/test.csv
+    outs:
+    - path: data/interim/test.csv
+      md5: 1012113db8c3284a4494aaed21a0609f
+      size: 189952765
+    - path: data/interim/train.csv
+      md5: 3666ad0aae9ccd368ee8a420c4542a1e
+      size: 237028117
+    - path: data/interim/val.csv
+      md5: 291d6a53b6cce4152d9fbd5cb0d551a1
+      size: 59256721
+  train:
+    cmd: python poisonous_mushroom_analysis/stages/train.py --config=params.yaml
+    deps:
+    - path: data/interim/train.csv
+      md5: 3666ad0aae9ccd368ee8a420c4542a1e
+      size: 237028117
+    - path: poisonous_mushroom_analysis/stages/train.py
+      md5: e5440e946a45df0bbd516a3383d40b3a
+      size: 1106
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+          n_jobs: -1
+        metadata:
+          id_col: id
+          target_col: class
+        preprocessing:
+          test_size: 0.2
+          original_train: data/processed/train.csv
+          original_test: data/processed/test.csv
+          trainset_path: data/interim/train.csv
+          valset_path: data/interim/val.csv
+          testset_path: data/interim/test.csv
+        train:
+          random_forest:
+            n_estimators: 20
+            max_depth: 5
+          model_path: models/classifier.joblib
+    outs:
+    - path: models/classifier.joblib
+      md5: 3a9791bdd42039ec3bdd42732c3b1b57
+      size: 104569
+  evaluate:
+    cmd: python poisonous_mushroom_analysis/stages/evaluate.py --config=params.yaml
+    deps:
+    - path: data/interim/train.csv
+      md5: 3666ad0aae9ccd368ee8a420c4542a1e
+      size: 237028117
+    - path: data/interim/val.csv
+      md5: 291d6a53b6cce4152d9fbd5cb0d551a1
+      size: 59256721
+    - path: models/classifier.joblib
+      md5: 3a9791bdd42039ec3bdd42732c3b1b57
+      size: 104569
+    - path: poisonous_mushroom_analysis/stages/evaluate.py
+      md5: 176cebde832485c70b59921776f889ae
+      size: 1775
+    params:
+      params.yaml:
+        evaluate:
+          reports_dir: reports
+          metrics_file: evaluation.json
+        metadata:
+          id_col: id
+          target_col: class
+        preprocessing:
+          test_size: 0.2
+          original_train: data/processed/train.csv
+          original_test: data/processed/test.csv
+          trainset_path: data/interim/train.csv
+          valset_path: data/interim/val.csv
+          testset_path: data/interim/test.csv
+        train:
+          random_forest:
+            n_estimators: 20
+            max_depth: 5
+          model_path: models/classifier.joblib
+    outs:
+    - path: reports/evaluation.json
+      md5: c656a41b1af1b2c08522d99a388616b7
+      size: 72

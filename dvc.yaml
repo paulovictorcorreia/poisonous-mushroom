@@ -1,0 +1,52 @@
+stages:
+  data_load:
+    cmd: python poisonous_mushroom_analysis/stages/data_load.py --config=params.yaml
+    deps:
+    - poisonous_mushroom_analysis/stages/data_load.py
+    params:
+    - data_load
+    - data_decompress
+    outs:
+    - data/processed/train.csv
+    - data/processed/test.csv
+  preprocessing:
+    cmd: python poisonous_mushroom_analysis/stages/preprocessing.py --config=params.yaml
+    deps:
+    - poisonous_mushroom_analysis/stages/preprocessing.py
+    - data/processed/train.csv
+    - data/processed/test.csv
+    params:
+    - preprocessing
+    - metadata
+    - base
+    outs:
+    - data/interim/train.csv
+    - data/interim/test.csv
+    - data/interim/val.csv
+  train:
+    cmd: python poisonous_mushroom_analysis/stages/train.py --config=params.yaml
+    deps:
+    - poisonous_mushroom_analysis/stages/train.py
+    - data/interim/train.csv
+    params:
+    - preprocessing
+    - metadata
+    - train
+    - base
+    outs:
+    - models/classifier.joblib
+  evaluate:
+    cmd: python poisonous_mushroom_analysis/stages/evaluate.py --config=params.yaml
+    deps:
+    - models/classifier.joblib
+    - poisonous_mushroom_analysis/stages/evaluate.py
+    - data/interim/train.csv
+    - data/interim/val.csv
+    params:
+    - train
+    - preprocessing
+    - metadata
+    - evaluate
+    outs:
+    - reports/evaluation.json
+
