@@ -34,11 +34,11 @@ stages:
     - train
     - base
     outs:
-    - models/classifier.joblib
+    - models/classifier2.joblib
   evaluate:
     cmd: python poisonous_mushroom_analysis/stages/evaluate.py --config=params.yaml
     deps:
-    - models/classifier.joblib
+    - models/classifier2.joblib
     - poisonous_mushroom_analysis/stages/evaluate.py
     - data/interim/train.csv
     - data/interim/val.csv
@@ -48,5 +48,5 @@ stages:
     - metadata
     - evaluate
     outs:
-    - reports/evaluation.json
+    - reports/evaluation2.json
 

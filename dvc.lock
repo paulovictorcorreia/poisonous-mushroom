@@ -84,13 +84,13 @@ stages:
           testset_path: data/interim/test.csv
         train:
           random_forest:
-            n_estimators: 20
-            max_depth: 5
-          model_path: models/classifier.joblib
+            n_estimators: 42
+            max_depth: 8
+          model_path: models/classifier2.joblib
     outs:
-    - path: models/classifier.joblib
-      md5: 3a9791bdd42039ec3bdd42732c3b1b57
-      size: 104569
+    - path: models/classifier2.joblib
+      md5: ecd2e811e7c5649fab02d6b24b79760d
+      size: 1162009
   evaluate:
     cmd: python poisonous_mushroom_analysis/stages/evaluate.py --config=params.yaml
     deps:
@@ -100,9 +100,9 @@ stages:
     - path: data/interim/val.csv
       md5: 291d6a53b6cce4152d9fbd5cb0d551a1
       size: 59256721
-    - path: models/classifier.joblib
-      md5: 3a9791bdd42039ec3bdd42732c3b1b57
-      size: 104569
+    - path: models/classifier2.joblib
+      md5: ecd2e811e7c5649fab02d6b24b79760d
+      size: 1162009
     - path: poisonous_mushroom_analysis/stages/evaluate.py
       md5: 176cebde832485c70b59921776f889ae
       size: 1775
@@ -110,7 +110,7 @@ stages:
       params.yaml:
         evaluate:
           reports_dir: reports
-          metrics_file: evaluation.json
+          metrics_file: evaluation2.json
         metadata:
           id_col: id
           target_col: class
@@ -123,10 +123,10 @@ stages:
           testset_path: data/interim/test.csv
         train:
           random_forest:
-            n_estimators: 20
-            max_depth: 5
-          model_path: models/classifier.joblib
+            n_estimators: 42
+            max_depth: 8
+          model_path: models/classifier2.joblib
     outs:
-    - path: reports/evaluation.json
-      md5: c656a41b1af1b2c08522d99a388616b7
+    - path: reports/evaluation2.json
+      md5: e653f4f7eefcebc69343689b400e3fce
       size: 72
