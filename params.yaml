@@ -1,5 +1,6 @@
 base:
   random_state: 42
+  n_jobs: -1
 
 data_load:
   file_id: '1v5PlKhhafsmWEvRUBj4Zpo2kkNDDR4HY'
@@ -9,14 +10,26 @@ data_load:
 data_decompress:
   processed_path: 'data/processed'
 
+preprocessing:
+  test_size: 0.2
+  original_train: 'data/processed/train.csv'
+  original_test: 'data/processed/test.csv'
+  trainset_path: 'data/interim/train.csv'
+  valset_path: 'data/interim/val.csv'
+  testset_path: 'data/interim/test.csv'
+
 train:
-  train_file: data/processed/train.csv
   random_forest:
     n_estimators: 20
     max_depth: 5
+  model_path: models/model.joblib
 
+evaluate:
+  reports_dir: 'reports'
+  metrics_file: 'metrics.json'
 
 metadata:
   id_col: 'id'
   target_col: 'class'
-  test_size: 0.75
+
+
