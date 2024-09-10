@@ -20,8 +20,8 @@ preprocessing:
 
 train:
   random_forest:
-    n_estimators: 42
-    max_depth: 8
+    n_estimators: 20
+    max_depth: 3
   model_path: models/classifier2.joblib
 
 evaluate:
